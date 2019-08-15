@@ -5,10 +5,9 @@ const PythonController = require('./controllers/PythonController');
 const routes = new express.Router();
 
 routes.get('/', (req, res) => {
-    res.send('Works');
+    res.status(200).send('Works');
 });
 
-routes.get('/input/:id', PythonController.inputToPythom);
-//mudar para post
+routes.post('/input', PythonController.inputToPythom);
 
 module.exports = routes;
