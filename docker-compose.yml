@@ -1,9 +1,16 @@
 version: "3"
 services:
-  mysql:
   nodejs:
+    build: ./nodejs
+    command: npm start
     ports:
     - "3001:3001"
+    volumes:
+    - ./nodejs:/usr/app
   python:
+    build: ./python
+    command: index.py
     ports:
     - "5000:5000"
+    volumes:
+    - ./python:/app
