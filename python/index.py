@@ -1,4 +1,6 @@
 from flask import Flask, request, jsonify
+import json
+#import convert
 
 app = Flask(__name__)
 
@@ -13,8 +15,7 @@ def output():
         if request.method == 'POST':
                 print (request.is_json)
                 content = request.get_json(force=True)
-                print (content)
-                #result = {'message':'give a message but doesnt get the object'}
+                #convert.tomp3(content.get("message"), 'New_audio')
                 result = content
                 return jsonify(result)
 
