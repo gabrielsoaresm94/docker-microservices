@@ -1,13 +1,27 @@
 const express = require('express');
 const cors = require('cors');
 
-const PORT = 3001;
-const HOST = "0.0.0.0";
+class AppController {
+  constructor() {
+    this.express = express();
 
-const app = express();
+    this.cors();
+    this.middlewares();
+    this.routes();
+  }
 
-app.use(cors());
-app.use(express.json());
-app.use(require('./routes'));
+  cors() {
+      this.express.use(cors());
+  }
 
-app.listen(PORT, HOST);
+  middlewares() {
+    this.express.use(express.json());
+  }
+
+  routes() {
+    this.express.use(require('./routes'));
+  }
+
+}
+
+module.exports = new AppController().express;
