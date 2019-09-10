@@ -1,6 +1,6 @@
 # SYSTEM OF MICROSERVICES WITH NODEJS AND PYTHON
 This is a construction of microservices using nodejs for a principal aplication and using python for work with our data.
-Este padrão para construção de microserviços, funciona utilizando como examplo uma aplicação que recebe uma `mensagem` de texto e transforma em `audio`.
+This pattern for building microservices works as an example of an application that receives a text `message` and turns it into `audio`.
 
 ## HOW TO USE
 
@@ -13,7 +13,7 @@ sudo apt-get update
 sudo apt-get install npm
 sudo apt-get install nodejs
 sudo apt-get install python3.6
-sudo apt-get install python-pip
+sudo apt-get install python3-pip
 ```
 #### Setup nodejs
 - Navigate to the repository `cd docker-microservices/nodejs`;
