@@ -7,7 +7,7 @@ class PythonController {
         //http://localhost:5000/output
         const result = await axios.post(`http://172.17.0.2:5000/output`, { message, name });
 
-        //await axios.get(`http://localhost:5000/files/${name}`);
+        await axios.get(`http://172.17.0.2:5000/files/${name}`);
 
         console.log(result.data);
         if(!result.data) {

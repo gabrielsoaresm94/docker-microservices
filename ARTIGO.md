@@ -1,6 +1,6 @@
 # Trabalhando com microservices para comunicar javascript com python
 
-Este projeto tratá-se uma experiência para poder realizar a comunicação entre duas linguagens, com a finalidade de estruturar dados e processá-los. Ele não segue especificamente os padrões deste tipo de arquitetura nem todas as boas práticas, se baseando em alguns tutorias da `Rocketseat` para a construção de uma API com nodejs e a documentação do `Flask`, para criação de rotas e fazer requisições. Para isso poder ocorrer iremos trabalhar com as seguintes tecnologias: 
+Este projeto tratá-se uma experiência para poder realizar a comunicação entre duas linguagens, com a finalidade de estruturar dados e processá-los. Ele não segue especificamente os padrões deste tipo de arquitetura nem todas as boas práticas, já que ainda estou no início e gostaria de aprender mais sobre o tema. Para isso poder ocorrer iremos trabalhar com as seguintes tecnologias: 
 
    - [Express](https://expressjs.com/pt-br/) - um framework de nodejs para a criação de APIs; 
    - [Flask](https://github.com/pallets/flask) - uma biblioteca de python também para criação de uma API;
@@ -11,7 +11,7 @@ Este projeto tratá-se uma experiência para poder realizar a comunicação entr
 
 Ela é praticamente como se fosse uma API Rest, mas com os módulos divididos em diversas aplicações menores, que cumprem funções específicas.
 
-(...) Ele não está seguindo todas as boas práticas
+Eles se comunicam através de requisições emitidas através do `gateway`, um serviço central que administra as comunicações e lida com as respostas.
 
 ## Desenvolvendo nosso gateway
 
@@ -114,7 +114,7 @@ O que esse código faz é importar o `axios`, pra gente conseguir fazer essa com
 
 Coloquei um console.log para visulizar o retorno do `python` e uma condição caso esse resultado não venha e caso tudo dê certo um `return res.status(200).json(result.data)`, para retornar o que foi recebido num json e um status 200.
 
-MUDAR '-' Lembrando que para ter acesso ao arquivo que iramos gerar no nosso microsserviço com python será preciso acessar uma rota específica, que irá disponibilizar um download se estivermos utilizando o browser, então por enquanto no `node`, o `axios` não está acessando essa rota. Sobre o IP escrito (...)
+Lembrando que para ter acesso ao arquivo que iramos gerar no nosso microsserviço com python será preciso acessar uma rota específica `/download` que será criado no desenvolvimento com `Flask`. Ela irá disponibilizar um download se estivermos utilizando o browser, se não estiver utilizando-o então ela irá nenhum arquivo será baixado, porém o log do `Flask` irá mostrar uma requisição tipo GET com o status `200` se ocorreu tudo certo.
 
 ## Desenvolvendo um microsserviço com Flask
 
@@ -254,6 +254,8 @@ docker build -t python .
 docker run -p 5000:5000 python
 ```
 Agora como nós queremos que eles se comuniquem, precisamos do IP do microsserviço `python` para o com `nodejs` conseguir acessar, com o `axios`:
+
+* OBS: Não esqueça de ir até a `PythonController` e mudar os IPs que estão sendo utilizados lá.
 ```
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <nome do container>
 ```
@@ -262,6 +264,3 @@ Lembrando que o nome do container não é o nome que demos pra imagem, que no ca
 Assim já podemos subistituir o `localhost` que se encontra na `PythonController`, pelo IP do container e fazer a requisição.
 
 Pronto! Agora temos nosso gateway `nodejs` e nosso microsserviço `python` se comunicando, espero que este tutorial tenha sido útil e que ele seja uma porta de entrada legal, para aprender a criar APIs Rest com javascript, trabalhar com python e também utilizar o Docker. Qualquer dúvida o código está hospedado no [github](https://github.com/gabrielsoaresm94/docker-microservices), td de bom !
-
-## Problemas com docker-compose
-
